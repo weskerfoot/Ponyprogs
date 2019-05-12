@@ -22,8 +22,6 @@ class ProcessHandler
       if not isNumeric(f) then
         try
           entries.delete(i)?
-        else
-          None
         end
       end
       i.add(1)
@@ -63,6 +61,4 @@ actor Main
       let proc_dir = FilePath(env.root as AmbientAuth, "/proc")?
       let procstat = ProcessStatus.create(proc_dir, env)
       procstat.getProcesses()
-    else
-      None
     end
