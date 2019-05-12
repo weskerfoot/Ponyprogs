@@ -47,20 +47,22 @@ class ProcessHandler
     end
 
 class ProcessStatus
-  fun getProcesses(cap : AmbientAuth, env : Env) =>
-    try
-      let proc_dir = FilePath(cap, "/proc")?
-      proc_dir.walk(ProcessHandler.create(env))
-    else
-      None
-    end
-    None
+  let proc_path : FilePath
+  let env : Env
+
+  new create(proc_path' : FilePath,
+             env' : Env) =>
+    proc_path = proc_path'
+    env = env'
+
+  fun getProcesses() => proc_path.walk(ProcessHandler.create(env))
 
 actor Main
   new create(env : Env) =>
-    let test = ProcessStatus.create()
     try
-      test.getProcesses(env.root as AmbientAuth, env)
+      let proc_dir = FilePath(env.root as AmbientAuth, "/proc")?
+      let procstat = ProcessStatus.create(proc_dir, env)
+      procstat.getProcesses()
     else
       None
     end
