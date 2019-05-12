@@ -26,7 +26,7 @@ class ProcessStatus
     try
       let proc_dir = FilePath(cap, "/proc")?
 
-      glob.iglob(proc_dir, "[1-9][0-9]*/stat", ProcessHandler.create(env))
+      glob.iglob(proc_dir, "[0-9]*/stat", ProcessHandler.create(env))
     else
       None
     end
