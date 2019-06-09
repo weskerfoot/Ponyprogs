@@ -1,3 +1,4 @@
 *.sh linguist-vendored
 *.c linguist-vendored
 *.h linguist-vendored
+bloom_filter/libfnv linguist-vendored
